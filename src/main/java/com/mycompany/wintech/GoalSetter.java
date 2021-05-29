@@ -1,11 +1,3 @@
-
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-
 /*
  * The MIT License
  *
@@ -34,45 +26,7 @@ import java.util.ArrayList;
  *
  * @author Thomas
  */
-
-public class GoalList {
-  public static void main(String[] args) throws Exception
-
-  {
-    ArrayList<Goal> Goals = new ArrayList<Goal>();
-
-    try{
-    FileInputStream fis = new FileInputStream("listData");
-    ObjectInputStream ois = new ObjectInputStream(fis);
-    Goals = (ArrayList) ois.readObject();
-    ois.close();
-    fis.close();
-    }
-      catch (IOException ioe)
-        {
-         ioe.printStackTrace();
-         return;
-        }
-     catch (ClassNotFoundException c)
-       {
-         System.out.println("Class not found");
-         c.printStackTrace();
-         return;
-       }
-
-    Goals.add(new Goal(1,1,"a","b"));
-    Goals.add(new Goal(1,1,"b","b"));
-    Goals.add(new Goal(1,1,"b","c"));
- 
-
-    FileOutputStream fos = new FileOutputStream("listData");
-    ObjectOutputStream oos = new ObjectOutputStream(fos);
-    oos.writeObject(Goals);
-    oos.close();
-    fos.close();
-
-  for(Goal g: Goals){
-    System.out.println(g);
-  }
-  }
+package com.mycompany.wintech;
+public class GoalSetter {
+    
 }
