@@ -59,19 +59,24 @@ public class GoalList {
     /**
      *
      * @param con
+     * @return 
      */
-    public static void viewTable(Connection con) {
+    public static Goal[] viewTable(Connection con) {
     String query = "select * from Goals";
     try (Statement stmt = con.createStatement()) {
       ResultSet rs = stmt.executeQuery(query);
-      while (rs.next()) {
-        String goalname = rs.getString("goalname");
-        int minutesperday = rs.getInt("minutesperday");
-        String completeddate = rs.getString("completeddate");
-        int iconnum = rs.getInt("iconnum");
+      query = "select COUNT(*) from Goals";
+      int size = stmt.executeQuery(query);
+      Goal[] arr;
+      arr = new Goal[size];
+      int x = 0;
+      for (rs.next();x<size;x++) {
+        arr[x] = new Goal(rs.getInt("iconnum"), rs.getInt("minutesperday"), rs.getString("goalname"), rs.getString("completeddate"));
       }
+      return arr;
     } catch (SQLException e) {
       System.out.println(e);
+      return null;
     }
   } 
 }
