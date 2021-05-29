@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 /*
  * The MIT License
  *
@@ -27,15 +29,27 @@
  * @author Thomas
  */
 public class Goal {
-  private int icon;
-  private int minutes;
-  private String name;
+  private final int icon;
+  private final int minutes;
+  private final String name;
   private boolean finished;
-  public Goal(int i, int m, String n){
+  private String completed;
+
+    /**
+     *
+     * @param i
+     * @param m
+     * @param n
+     * @param o
+     */
+    public Goal(int i, int m, String n, String o){
     icon = i;
     minutes = m;
     name = n;
-    finished = false;
+    completed = o;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    LocalDateTime now = LocalDateTime.now();
+    finished = completed == null ? dtf.format(now) == null : completed.equals(dtf.format(now));
   }
   public int getIcon(){
     return icon;
@@ -49,8 +63,8 @@ public class Goal {
   public boolean getFinished(){
     return finished;
   }
-  public void check(){
-    finished = !finished;
+  public String getCompleted(){
+    return completed;
   }
 
 }
