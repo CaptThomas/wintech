@@ -1,5 +1,5 @@
+package com.mycompany.wintech;
 
-import java.beans.*;
 import java.sql.*;
 import java.util.Arrays;
 
@@ -33,7 +33,9 @@ import java.util.Arrays;
  */
 
 public class GoalList {
-     public static Connection connect() {
+ 
+     public static Connection connect() throws ClassNotFoundException {
+         Class<?> forName = Class.forName("org.sqlite.JDBC");
         Connection conn = null;
         try {
             // db parameters

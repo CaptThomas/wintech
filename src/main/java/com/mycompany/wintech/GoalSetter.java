@@ -26,6 +26,7 @@
  *
  * @author Thomas
  */
+package com.mycompany.wintech;
 public class GoalSetter {
     
 }
