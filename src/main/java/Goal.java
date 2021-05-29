@@ -41,7 +41,7 @@ public class Goal {
     return icon;
   }
   public int getMinutes(){
-    return Minutes;
+    return minutes;
   }
   public String getName(){
     return name;
