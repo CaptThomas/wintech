@@ -27,5 +27,30 @@
  * @author Thomas
  */
 public class Goal {
-    
+  private int icon;
+  private int minutes;
+  private String name;
+  private boolean finished;
+  public Goal(int i, int m, String n){
+    icon = i;
+    minutes = m;
+    name = n;
+    finished = false;
+  }
+  public int getIcon(){
+    return icon;
+  }
+  public int getMinutes(){
+    return Minutes;
+  }
+  public String getName(){
+    return name;
+  }
+  public boolean getFinished(){
+    return finished;
+  }
+  public void check(){
+    finished = !finished;
+  }
+
 }
