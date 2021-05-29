@@ -1,6 +1,7 @@
 
 import java.beans.*;
 import java.sql.*;
+import java.util.Arrays;
 
 /*
  * The MIT License
@@ -63,16 +64,19 @@ public class GoalList {
      */
     public static Goal[] viewTable(Connection con) {
     String query = "select * from Goals";
-    try (Statement stmt = con.createStatement()) {
+    try (java.sql.Statement stmt = con.createStatement()) {
       ResultSet rs = stmt.executeQuery(query);
       query = "select COUNT(*) from Goals";
-      int size = stmt.executeQuery(query);
+      ResultSet rssize = stmt.executeQuery(query);
+      int size;
+        size = rssize.getInt(1);
       Goal[] arr;
       arr = new Goal[size];
       int x = 0;
       for (rs.next();x<size;x++) {
         arr[x] = new Goal(rs.getInt("iconnum"), rs.getInt("minutesperday"), rs.getString("goalname"), rs.getString("completeddate"));
       }
+      System.out.println(Arrays.toString(arr));
       return arr;
     } catch (SQLException e) {
       System.out.println(e);
@@ -85,7 +89,7 @@ public class GoalList {
         }
         String query;
          query = String.format("INSERT INTO Goals VALUES ('%s', %d, '-1', %d);", goalname, minutes, iconnum);
-        try (Statement stmt = con.createStatement()) {
+        try (java.sql.Statement stmt = con.createStatement()) {
             stmt.executeQuery(query);
         } catch (SQLException e) {
             System.out.println(e);
