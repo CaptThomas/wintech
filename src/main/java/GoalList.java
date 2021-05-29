@@ -1,6 +1,10 @@
 
-import java.beans.*;
-import java.sql.*;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 /*
  * The MIT License
@@ -32,51 +36,43 @@ import java.sql.*;
  */
 
 public class GoalList {
-     public static Connection connect() {
-        Connection conn = null;
-        try {
-            // db parameters
-            String url = "jdbc:sqlite:db.db";
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
-            
-            System.out.println("Connection to SQLite has been established.");
-            return conn;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+  public static void main(String[] args) throws Exception
+
+  {
+    ArrayList<Goal> Goals = new ArrayList<Goal>();
+
+    try{
+    FileInputStream fis = new FileInputStream("listData");
+    ObjectInputStream ois = new ObjectInputStream(fis);
+    Goals = (ArrayList) ois.readObject();
+    ois.close();
+    fis.close();
+    }
+      catch (IOException ioe)
+        {
+         ioe.printStackTrace();
+         return;
         }
-        return conn;
-    }
-     
-    /**
-     *
-     * @param con
-     * @return 
-     */
-    public static Goal[] viewTable(Connection con) {
-    String query = "select * from Goals";
-    try (Statement stmt = con.createStatement()) {
-      ResultSet rs = stmt.executeQuery(query);
-      query = "select COUNT(*) from Goals";
-      int size = stmt.executeQuery(query);
-      Goal[] arr;
-      arr = new Goal[size];
-      int x = 0;
-      for (rs.next();x<size;x++) {
-        arr[x] = new Goal(rs.getInt("iconnum"), rs.getInt("minutesperday"), rs.getString("goalname"), rs.getString("completeddate"));
-      }
-      return arr;
-    } catch (SQLException e) {
-      System.out.println(e);
-      return null;
-    }
-  } 
+     catch (ClassNotFoundException c)
+       {
+         System.out.println("Class not found");
+         c.printStackTrace();
+         return;
+       }
+
+    Goals.add(new Goal(1,1,"a","b"));
+    Goals.add(new Goal(1,1,"b","b"));
+    Goals.add(new Goal(1,1,"b","c"));
+ 
+
+    FileOutputStream fos = new FileOutputStream("listData");
+    ObjectOutputStream oos = new ObjectOutputStream(fos);
+    oos.writeObject(Goals);
+    oos.close();
+    fos.close();
+
+  for(Goal g: Goals){
+    System.out.println(g);
+  }
+  }
 }

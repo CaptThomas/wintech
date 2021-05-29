@@ -1,5 +1,6 @@
-import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime; 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 /*
  * The MIT License
  *
@@ -28,7 +29,7 @@ import java.time.LocalDateTime;
  *
  * @author Thomas
  */
-public class Goal {
+public class Goal implements Serializable {
   private final int icon;
   private final int minutes;
   private final String name;
@@ -67,4 +68,8 @@ public class Goal {
     return completed;
   }
 
+  @Override
+  public String toString() {
+      return icon + "" + minutes + "" + name + completed;
+  }
 }
