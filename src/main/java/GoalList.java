@@ -78,5 +78,17 @@ public class GoalList {
       System.out.println(e);
       return null;
     }
-  } 
+  }
+    public static void newGoal(Connection con, int iconnum, int minutes, String goalname) throws SQLException{
+        if (goalname.length() > 255) {
+            goalname = goalname.substring(0, 254);
+        }
+        String query;
+         query = String.format("INSERT INTO Goals VALUES ('%s', %d, '-1', %d);", goalname, minutes, iconnum);
+        try (Statement stmt = con.createStatement()) {
+            stmt.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }
