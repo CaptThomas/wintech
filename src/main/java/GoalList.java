@@ -1,3 +1,7 @@
+
+import java.beans.*;
+import java.sql.*;
+
 /*
  * The MIT License
  *
@@ -26,6 +30,48 @@
  *
  * @author Thomas
  */
+
 public class GoalList {
-    
+     public static Connection connect() {
+        Connection conn = null;
+        try {
+            // db parameters
+            String url = "jdbc:sqlite:db.db";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+            
+            System.out.println("Connection to SQLite has been established.");
+            return conn;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return conn;
+    }
+     
+    /**
+     *
+     * @param con
+     */
+    public static void viewTable(Connection con) {
+    String query = "select * from Goals";
+    try (Statement stmt = con.createStatement()) {
+      ResultSet rs = stmt.executeQuery(query);
+      while (rs.next()) {
+        String goalname = rs.getString("goalname");
+        int minutesperday = rs.getInt("minutesperday");
+        String completeddate = rs.getString("completeddate");
+        int iconnum = rs.getInt("iconnum");
+      }
+    } catch (SQLException e) {
+      System.out.println(e);
+    }
+  } 
 }
