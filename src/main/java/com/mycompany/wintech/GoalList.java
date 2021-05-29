@@ -37,7 +37,7 @@ import java.util.ArrayList;
  */
 
 public class GoalList {
-  public static void main(String[] args) throws Exception
+  public static ArrayList<Goal> getList(String[] args) throws Exception
 
   {
     ArrayList<Goal> Goals = new ArrayList<Goal>();
@@ -52,13 +52,13 @@ public class GoalList {
       catch (IOException ioe)
         {
          ioe.printStackTrace();
-         return;
+         return null;
         }
      catch (ClassNotFoundException c)
        {
          System.out.println("Class not found");
          c.printStackTrace();
-         return;
+         return null;
        }
 
     Goals.add(new Goal(1,1,"a","b"));
@@ -75,5 +75,6 @@ public class GoalList {
   for(Goal g: Goals){
     System.out.println(g);
   }
+  return Goals;
   }
 }

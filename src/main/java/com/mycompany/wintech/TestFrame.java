@@ -1,9 +1,13 @@
+package com.mycompany.wintech;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.function.Function;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 public class TestFrame{
-  public static void main(String args[]) {
+  public static void main(String args[]) throws Exception {
     String[] data = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 
     JFrame frame = new JFrame();
@@ -31,8 +35,17 @@ public class TestFrame{
 
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
-    model.addElement("John Smith");
-    model.addElement("Kathy Green");
+    ArrayList<Goal> Goals = GoalList.getList(args);
+    Goals.stream().map((Goal g) -> {
+        String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
+        if (g.getFinished() == true) {
+            s = String.format("%s completed today", s);
+        } else {
+            s = String.format("%s not yet completed today", s);
+        } return s;
+    }).forEachOrdered(s -> {
+          model.addElement(s);
+      });
 
 
     panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
