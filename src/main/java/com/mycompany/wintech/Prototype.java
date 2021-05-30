@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -92,7 +93,7 @@ public class Prototype{
     JTextField name = new JTextField(5);
 
     Object[] test = {
-      "Time", time,
+      "Minutes per day", time,
       "Name", name
     };
 
@@ -245,6 +246,10 @@ public class Prototype{
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     frame.setPreferredSize(screenSize);
     frame.setSize(350, 250);
+    panel.setBackground(new Color(244, 241, 188));
+    leftPanel.setBackground(new Color(244, 241, 188));
+    list.setBackground(new Color(244, 241, 188));
+    rightPanel.setBackground(new Color(244, 241, 188));
     Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
     frame.setIconImage(icon);
     frame.add(panel, BorderLayout.CENTER);
