@@ -1,4 +1,5 @@
 
+
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,43 +37,58 @@ import java.util.ArrayList;
  */
 
 public class GoalList {
-  public static void main(String[] args) throws Exception
+  static ArrayList<Goal> Goals;
+  public GoalList(){
+    Goals = new ArrayList<Goal>();
+  }
 
-  {
-    ArrayList<Goal> Goals = new ArrayList<Goal>();
-
-    try{
-    FileInputStream fis = new FileInputStream("listData");
-    ObjectInputStream ois = new ObjectInputStream(fis);
-    Goals = (ArrayList) ois.readObject();
-    ois.close();
-    fis.close();
-    }
-      catch (IOException ioe)
-        {
-         ioe.printStackTrace();
-         return;
-        }
-     catch (ClassNotFoundException c)
-       {
-         System.out.println("Class not found");
-         c.printStackTrace();
-         return;
-       }
-
-    Goals.add(new Goal(1,1,"a","b"));
-    Goals.add(new Goal(1,1,"b","b"));
-    Goals.add(new Goal(1,1,"b","c"));
-
-
+    /**
+     *
+     * @throws Exception
+     */
+    public void Save() throws Exception{
     FileOutputStream fos = new FileOutputStream("listData");
     ObjectOutputStream oos = new ObjectOutputStream(fos);
     oos.writeObject(Goals);
     oos.close();
     fos.close();
-
-    for(Goal g: Goals){
-    System.out.println(g);
   }
+
+    /**
+     *
+     * @throws Exception
+     */
+    public void Load() throws Exception{
+    try{
+      FileInputStream fis = new FileInputStream("listData");
+      ObjectInputStream ois = new ObjectInputStream(fis);
+      Goals = (ArrayList) ois.readObject();
+      ois.close();
+      fis.close();
+    }
+    catch (IOException ioe)
+      {
+       ioe.printStackTrace();
+      }
+    catch (ClassNotFoundException c)
+      {
+       System.out.println("Class not found");
+       c.printStackTrace();
+      }
+  }
+
+    /**
+     *
+     * @param a
+     */
+  public void replace(ArrayList<Goal> a){
+      Goals = a;
+  }
+  public ArrayList<Goal> getList(){
+      Goals.add(new Goal(3, "test", "-1"));
+    return Goals;
+  }
+  public void add(Goal g){
+    Goals.add(g);
   }
 }

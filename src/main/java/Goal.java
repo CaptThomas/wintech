@@ -1,6 +1,10 @@
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 /*
  * The MIT License
  *
@@ -30,7 +34,6 @@ import java.io.Serializable;
  * @author Thomas
  */
 public class Goal implements Serializable {
-  private final int icon;
   private final int minutes;
   private final String name;
   private boolean finished;
@@ -38,22 +41,17 @@ public class Goal implements Serializable {
 
     /**
      *
-     * @param i
      * @param m
      * @param n
      * @param o
      */
-    public Goal(int i, int m, String n, String o){
-    icon = i;
+    public Goal(int m, String n, String o){
     minutes = m;
     name = n;
     completed = o;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     LocalDateTime now = LocalDateTime.now();
     finished = completed == null ? dtf.format(now) == null : completed.equals(dtf.format(now));
-  }
-  public int getIcon(){
-    return icon;
   }
   public int getMinutes(){
     return minutes;
@@ -70,6 +68,6 @@ public class Goal implements Serializable {
 
   @Override
   public String toString() {
-      return icon + "" + minutes + "" + name + completed;
+      return minutes + "" + name + completed;
   }
 }

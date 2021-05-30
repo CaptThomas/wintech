@@ -1,4 +1,4 @@
-package com.mycompany.wintech;
+
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -24,7 +26,7 @@ public class TestFrame{
 
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
-
+    GoalList a = new GoalList();
 
 
 
@@ -32,6 +34,8 @@ public class TestFrame{
 
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
+    JButton check = new JButton("Check");
+    JButton uncheck = new JButton("Uncheck");
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -41,7 +45,7 @@ public class TestFrame{
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
 
-    ArrayList<Goal> Goals = GoalList.getList();
+    ArrayList<Goal> Goals = a.getList();
     if (Goals != null) {
         Goals.stream().map((Goal g) -> {
             String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
@@ -70,8 +74,24 @@ public class TestFrame{
       }
 
     });
+    check.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent event) {
+            ListSelectionModel selmodel = list.getSelectionModel();
+            int index = selmodel.getMinSelectionIndex();
+            if (index >= 0) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                LocalDateTime now = LocalDateTime.now();
+                Goal g = new Goal(Goals.get(index).getMinutes(), Goals.get(index).getName(), dtf.format(now));
+                Goals.set(index, g);
+                GoalList.replace(Goals);
+            }
+                
+        }
+    });
 
     rightPanel.add(delete);
+    rightPanel.add(check);
+    rightPanel.add(uncheck);
     rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
     leftPanel.add(list);
     panel.add(leftPanel);
