@@ -34,7 +34,6 @@ import java.time.LocalDateTime;
  * @author Thomas
  */
 public class Goal implements Serializable {
-  private final int icon;
   private final int minutes;
   private final String name;
   private boolean finished;
@@ -47,17 +46,13 @@ public class Goal implements Serializable {
      * @param n
      * @param o
      */
-    public Goal(int i, int m, String n, String o){
-    icon = i;
+    public Goal(int m, String n, String o){
     minutes = m;
     name = n;
     completed = o;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     LocalDateTime now = LocalDateTime.now();
     finished = completed == null ? dtf.format(now) == null : completed.equals(dtf.format(now));
-  }
-  public int getIcon(){
-    return icon;
   }
   public int getMinutes(){
     return minutes;
@@ -74,6 +69,6 @@ public class Goal implements Serializable {
 
   @Override
   public String toString() {
-      return icon + "" + minutes + "" + name + completed;
+      return minutes + "" + name + completed;
   }
 }

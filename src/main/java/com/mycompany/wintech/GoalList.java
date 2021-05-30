@@ -42,7 +42,11 @@ public class GoalList {
     Goals = new ArrayList<Goal>();
   }
 
-  public void Save() throws Exception{
+    /**
+     *
+     * @throws Exception
+     */
+    public static void Save() throws Exception{
     FileOutputStream fos = new FileOutputStream("listData");
     ObjectOutputStream oos = new ObjectOutputStream(fos);
     oos.writeObject(Goals);
@@ -50,7 +54,11 @@ public class GoalList {
     fos.close();
   }
 
-  public void Load() throws Exception{
+    /**
+     *
+     * @throws Exception
+     */
+    public static void Load() throws Exception{
     try{
       FileInputStream fis = new FileInputStream("listData");
       ObjectInputStream ois = new ObjectInputStream(fis);
@@ -69,10 +77,15 @@ public class GoalList {
       }
   }
 
-  public void replace(ArrayList<Goal> a){
+    /**
+     *
+     * @param a
+     */
+    public static void replace(ArrayList<Goal> a){
       Goals = a;
   }
   public static ArrayList<Goal> getList(String[] args){
+      Goals.add(new Goal(3, "test", "-1"));
     return Goals;
   }
 }
