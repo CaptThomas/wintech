@@ -112,8 +112,8 @@ public class Prototype{
 
       }
     };
-    new Timer(10000, timeWarn).start();
-
+    new Timer(600000, timeWarn).start();
+    
     delete.addActionListener((ActionEvent event) -> {
         ListSelectionModel selmodel = list.getSelectionModel();
         int index = selmodel.getMinSelectionIndex();
