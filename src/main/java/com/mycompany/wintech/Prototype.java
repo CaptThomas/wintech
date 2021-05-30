@@ -207,17 +207,25 @@ public class Prototype{
     add.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event){
         int result = JOptionPane.showConfirmDialog(null, test,
-                 "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                 "Enter Time and Name", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-          //model.addElement(new Goal(Integer.parseInt(time.getText()),name.getText(),""));
-        }
-        Object[] a = model.toArray();
-        ArrayList<Goal> arr = new ArrayList<Goal>();
+          ArrayList<Goal> arr = g.getList();
 
-        for(Object g:a){
-          arr.add((Goal) g);
-        }
+        arr.add(new Goal (Integer.parseInt(time.getText()),name.getText(),"-1"));
         g.replace(arr);
+        model.clear();
+        if (arr != null) {
+                arr.stream().map((Goal newgoals) -> {
+                    String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
+                    if (newgoals.getFinished() == true) {
+                        s = String.format("%s completed today", s);
+                    } else {
+                        s = String.format("%s not yet completed today", s);
+                    } return s;
+        }).forEachOrdered(s -> {
+            model.addElement(s);
+        });
+                }
         try{
         g.Save();
         }
@@ -225,6 +233,11 @@ public class Prototype{
           System.out.println("Exception :):):):)");
           e.printStackTrace();
         }
+        
+        
+        }
+        
+        
       }
     });
 
