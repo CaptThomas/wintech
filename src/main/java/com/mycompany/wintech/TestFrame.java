@@ -36,16 +36,19 @@ public class TestFrame{
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
     ArrayList<Goal> Goals = GoalList.getList(args);
-    Goals.stream().map((Goal g) -> {
-        String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
-        if (g.getFinished() == true) {
-            s = String.format("%s completed today", s);
-        } else {
-            s = String.format("%s not yet completed today", s);
-        } return s;
-    }).forEachOrdered(s -> {
-          model.addElement(s);
-      });
+    if (Goals.size() > 0) {
+        Goals.stream().map((Goal g) -> {
+            String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
+            if (g.getFinished() == true) {
+                s = String.format("%s completed today", s);
+            } else {
+                s = String.format("%s not yet completed today", s);
+            } return s;
+        }).forEachOrdered(s -> {
+            model.addElement(s);
+        });
+    } else {
+    }
 
 
     panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
