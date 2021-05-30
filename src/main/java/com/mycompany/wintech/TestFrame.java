@@ -36,7 +36,7 @@ public class TestFrame{
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
     ArrayList<Goal> Goals = GoalList.getList(args);
-    if (Goals.size() > 0) {
+    if (Goals != null) {
         Goals.stream().map((Goal g) -> {
             String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
             if (g.getFinished() == true) {
