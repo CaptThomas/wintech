@@ -1,3 +1,5 @@
+package com.mycompany.wintech;
+
 
 
 import java.awt.BorderLayout;
