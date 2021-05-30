@@ -1,2 +1,5 @@
 /target/
 *.class
+*.class
+src/main/java/com/mycompany/wintech/Prototype$1.class
+src/main/java/com/mycompany/wintech/Prototype.class

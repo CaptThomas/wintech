@@ -3,22 +3,14 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.function.Function;
 
 import javax.swing.*;
-import java.util.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 //import Goal;
 //import GoalList;
 public class Prototype{
@@ -28,7 +20,7 @@ public class Prototype{
   public static ArrayList<Goal> dToArr(JList<Goal> dm){
     //ArrayList<Goal> r = new ArrayList<Goal>();
     int s = dm.getModel().getSize();
-    ArrayList<Goal> list = new ArrayList<Goal>(s);
+    ArrayList<Goal> list = new ArrayList<>(s);
     for (int i = 0; i < s; i++) {
         list.add(dm.getModel().getElementAt(i));
     }
@@ -111,41 +103,35 @@ public class Prototype{
     panel.setLayout(new GridLayout(0,1));
 
 
-    delete.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent event) {
+    delete.addActionListener((ActionEvent event) -> {
         ListSelectionModel selmodel = list.getSelectionModel();
         int index = selmodel.getMinSelectionIndex();
         if (index >= 0)
-          model.remove(index);
-          ArrayList<Goal> arr =g.getList();
-          arr.remove(index);
-          g.replace(arr);
-          try{
-          g.Save();
-          }
-          catch(Exception e){
+            model.remove(index);
+        ArrayList<Goal> arr =g.getList();
+        arr.remove(index);
+        g.replace(arr);
+        try{
+            g.Save();
+        }
+        catch(Exception e){
             System.out.println("Exception :):):):)");
-            e.printStackTrace();
-          }
-
-      }
-
+        }
     });
-    check.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent event) {
-            ListSelectionModel selmodel = list.getSelectionModel();
-            int index = selmodel.getMinSelectionIndex();
-            if (index >= 0) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                LocalDateTime now = LocalDateTime.now();
-
-                ArrayList<Goal> arr = g.getList();
-    
-                Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), dtf.format(now));
-                arr.set(index, goal);
-                g.replace(arr);
-                model.clear();
-                if (arr != null) {
+    check.addActionListener((ActionEvent event) -> {
+        ListSelectionModel selmodel = list.getSelectionModel();
+        int index = selmodel.getMinSelectionIndex();
+        if (index >= 0) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDateTime now = LocalDateTime.now();
+            
+            ArrayList<Goal> arr = g.getList();
+            
+            Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), dtf.format(now));
+            arr.set(index, goal);
+            g.replace(arr);
+            model.clear();
+            if (arr != null) {
                 arr.stream().map((Goal newgoals) -> {
                     String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
                     if (newgoals.getFinished() == true) {
@@ -153,28 +139,26 @@ public class Prototype{
                     } else {
                         s = String.format("%s not yet completed today", s);
                     } return s;
-        }).forEachOrdered(s -> {
-            model.addElement(s);
-        });
-    }
-                try{
-                    g.Save();
-                }
-                catch(Exception e){
-                    System.out.println("Exception :):):):)");
-                    e.printStackTrace();
-                }
-
+                }).forEachOrdered(s -> {
+                    model.addElement(s);
+                });
             }
-
+            try{
+                g.Save();
+            }
+            catch(Exception e){
+                System.out.println("Exception :):):):)");
+            }
+            
         }
     });
     uncheck.addActionListener(new ActionListener() {
+        @Override
         public void actionPerformed(ActionEvent event) {
             ListSelectionModel selmodel = list.getSelectionModel();
             int index = selmodel.getMinSelectionIndex();
             if (index >= 0) {
-
+                
                 
                 ArrayList<Goal> arr = g.getList();
                 
@@ -183,41 +167,38 @@ public class Prototype{
                 g.replace(arr);
                 model.clear();
                 if (arr != null) {
-                arr.stream().map((Goal newgoals) -> {
-                    String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
-                    if (newgoals.getFinished() == true) {
-                        s = String.format("%s completed today", s);
-                    } else {
-                        s = String.format("%s not yet completed today", s);
-                    } return s;
-        }).forEachOrdered(s -> {
-            model.addElement(s);
-        });
+                    arr.stream().map((Goal newgoals) -> {
+                        String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
+                        if (newgoals.getFinished() == true) {
+                            s = String.format("%s completed today", s);
+                        } else {
+                            s = String.format("%s not yet completed today", s);
+                        } return s;
+                    }).forEachOrdered(s -> {
+                        model.addElement(s);
+                    });
                 }
                 try{
                     g.Save();
                 }
                 catch(Exception e){
                     System.out.println("Exception :):):):)");
-                    e.printStackTrace();
                 }
-
+                
             }
-
         }
     });
 
-    add.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent event){
+    add.addActionListener((ActionEvent event) -> {
         int result = JOptionPane.showConfirmDialog(null, test,
-                 "Enter Time and Name", JOptionPane.OK_CANCEL_OPTION);
+                "Enter Time and Name", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-          ArrayList<Goal> arr = g.getList();
-
-        arr.add(new Goal (Integer.parseInt(time.getText()),name.getText(),"-1"));
-        g.replace(arr);
-        model.clear();
-        if (arr != null) {
+            ArrayList<Goal> arr = g.getList();
+            
+            arr.add(new Goal (Integer.parseInt(time.getText()),name.getText(),"-1"));
+            g.replace(arr);
+            model.clear();
+            if (arr != null) {
                 arr.stream().map((Goal newgoals) -> {
                     String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
                     if (newgoals.getFinished() == true) {
@@ -225,23 +206,19 @@ public class Prototype{
                     } else {
                         s = String.format("%s not yet completed today", s);
                     } return s;
-        }).forEachOrdered(s -> {
-            model.addElement(s);
-        });
-                }
-        try{
-        g.Save();
+                }).forEachOrdered(s -> {
+                    model.addElement(s);
+                });
+            }
+            try{
+                g.Save();
+            }
+            catch(Exception e){
+                System.out.println("Exception :):):):)");
+            }
+            
+            
         }
-        catch(Exception e){
-          System.out.println("Exception :):):):)");
-          e.printStackTrace();
-        }
-        
-        
-        }
-        
-        
-      }
     });
 
 
