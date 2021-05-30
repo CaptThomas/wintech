@@ -41,7 +41,7 @@ public class TestFrame{
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
 
-    ArrayList<Goal> Goals = GoalList.getList(args);
+    ArrayList<Goal> Goals = GoalList.getList();
     if (Goals != null) {
         Goals.stream().map((Goal g) -> {
             String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
