@@ -63,7 +63,7 @@ public class GoalList {
     Goals.add(new Goal(1,1,"a","b"));
     Goals.add(new Goal(1,1,"b","b"));
     Goals.add(new Goal(1,1,"b","c"));
- 
+
 
     FileOutputStream fos = new FileOutputStream("listData");
     ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -71,7 +71,7 @@ public class GoalList {
     oos.close();
     fos.close();
 
-  for(Goal g: Goals){
+    for(Goal g: Goals){
     System.out.println(g);
   }
   }

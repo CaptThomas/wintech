@@ -1,4 +1,3 @@
-package com.mycompany.wintech;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -19,16 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-public class TestFrame{
+public class Prototype{
   public static void main(String args[]) throws Exception {
-
-    final DefaultListModel<String> model = new DefaultListModel<>();
-    final JList<String> list = new JList<>(model);
-
-
-
-
-
+    String[] data = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
@@ -40,27 +32,23 @@ public class TestFrame{
     leftPanel.setLayout(new BorderLayout());
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
+    final DefaultListModel<String> model = new DefaultListModel<>();
+    final JList<String> list = new JList<>(model);
 
-    ArrayList<Goal> Goals = GoalList.getList(args);
-    if (Goals != null) {
-        Goals.stream().map((Goal g) -> {
-            String s = String.format("%s for %d minutes |", g.getName(), g.getMinutes());
-            if (g.getFinished() == true) {
-                s = String.format("%s completed today", s);
-            } else {
-                s = String.format("%s not yet completed today", s);
-            } return s;
-        }).forEachOrdered(s -> {
-            model.addElement(s);
-        });
-    } else {
+    GoalList g = new GoalList();
+    model.addElement(new Goal(1,"1","1"));
+    model.addElement(new Goal(1,"3","3"));
+    model.addElement(new Goal(1,"1","2"));
+
+    for(Goal i: g){
+      model.add(i);
     }
 
 
     panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
     panel.setLayout(new GridLayout(0,1));
 
-    leftPanel.add(new JScrollPane(list));
+
     delete.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         ListSelectionModel selmodel = list.getSelectionModel();
@@ -71,6 +59,7 @@ public class TestFrame{
 
     });
 
+    leftPanel.add(new JScrollPane(list));
     rightPanel.add(delete);
     rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
     leftPanel.add(list);

@@ -28,5 +28,11 @@
  */
 package com.mycompany.wintech;
 public class GoalSetter {
-    
+
+
+
+
+
+
+
 }
