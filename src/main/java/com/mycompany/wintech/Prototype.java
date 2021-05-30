@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import javax.swing.Timer;
 //import Goal;
 //import GoalList;
 public class Prototype{
@@ -99,9 +100,18 @@ public class Prototype{
 
 
 
+
     panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
     panel.setLayout(new GridLayout(0,1));
 
+
+    ActionListener timeWarn = new ActionListener(){
+      public void actionPerformed(ActionEvent evt) {
+        JOptionPane.showMessageDialog(frame,"Take a Break.");
+
+      }
+    };
+    new Timer(10000, timeWarn).start();
 
     delete.addActionListener((ActionEvent event) -> {
         ListSelectionModel selmodel = list.getSelectionModel();
@@ -124,9 +134,9 @@ public class Prototype{
         if (index >= 0) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             LocalDateTime now = LocalDateTime.now();
-            
+
             ArrayList<Goal> arr = g.getList();
-            
+
             Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), dtf.format(now));
             arr.set(index, goal);
             g.replace(arr);
@@ -149,7 +159,7 @@ public class Prototype{
             catch(Exception e){
                 System.out.println("Exception :):):):)");
             }
-            
+
         }
     });
     uncheck.addActionListener(new ActionListener() {
@@ -158,10 +168,10 @@ public class Prototype{
             ListSelectionModel selmodel = list.getSelectionModel();
             int index = selmodel.getMinSelectionIndex();
             if (index >= 0) {
-                
-                
+
+
                 ArrayList<Goal> arr = g.getList();
-                
+
                 Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), "-1");
                 arr.set(index, goal);
                 g.replace(arr);
@@ -184,7 +194,7 @@ public class Prototype{
                 catch(Exception e){
                     System.out.println("Exception :):):):)");
                 }
-                
+
             }
         }
     });
@@ -194,7 +204,7 @@ public class Prototype{
                 "Enter Time and Name", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             ArrayList<Goal> arr = g.getList();
-            
+
             arr.add(new Goal (Integer.parseInt(time.getText()),name.getText(),"-1"));
             g.replace(arr);
             model.clear();
@@ -216,8 +226,8 @@ public class Prototype{
             catch(Exception e){
                 System.out.println("Exception :):):):)");
             }
-            
-            
+
+
         }
     });
 
