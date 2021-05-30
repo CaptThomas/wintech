@@ -61,11 +61,11 @@ public class Prototype{
 
     GoalList g = new GoalList();
 
-    g.add(new Goal(1,"1","1"));
+    /*g.add(new Goal(1,"1","1"));
     g.add(new Goal(1,"3","3"));
     g.add(new Goal(1,"1","2"));
     g.add(new Goal(5,"test","test1"));
-    g.Save();
+    g.Save();*/
     g.Load();
     ArrayList<Goal> Goals = g.getList();
     if (Goals != null) {
