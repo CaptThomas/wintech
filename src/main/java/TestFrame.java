@@ -88,6 +88,18 @@ public class TestFrame{
                 
         }
     });
+    uncheck.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent event) {
+            ListSelectionModel selmodel = list.getSelectionModel();
+            int index = selmodel.getMinSelectionIndex();
+            if (index >= 0) {
+                Goal g = new Goal(Goals.get(index).getMinutes(), Goals.get(index).getName(), "-1");
+                Goals.set(index, g);
+                GoalList.replace(Goals);
+            }
+                
+        }
+    });
 
     rightPanel.add(delete);
     rightPanel.add(check);
