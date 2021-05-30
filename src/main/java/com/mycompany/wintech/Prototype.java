@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -257,6 +258,8 @@ public class Prototype{
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     frame.setPreferredSize(screenSize);
     frame.setSize(350, 250);
+    Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+    frame.setIconImage(icon);
     frame.add(panel, BorderLayout.CENTER);
     //frame.add(new JList(data));
     //frame.add(delete);
