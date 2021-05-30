@@ -18,12 +18,36 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+//import Goal;
+//import GoalList;
 public class Prototype{
+
+
+
+  public static ArrayList<Goal> dToArr(JList<Goal> dm){
+    //ArrayList<Goal> r = new ArrayList<Goal>();
+    int s = dm.getModel().getSize();
+    ArrayList<Goal> list = new ArrayList<Goal>(s);
+    for (int i = 0; i < s; i++) {
+        list.add(dm.getModel().getElementAt(i));
+    }
+    return list;
+  }
+  /*
+  public DefaultListModel<Goal> arrToD(){
+
+  }
+  */
   public static void main(String args[]) throws Exception {
-    String[] data = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
+    JButton add = new JButton("Add");
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -32,16 +56,19 @@ public class Prototype{
     leftPanel.setLayout(new BorderLayout());
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
-    final DefaultListModel<String> model = new DefaultListModel<>();
-    final JList<String> list = new JList<>(model);
+    final DefaultListModel<Goal> model = new DefaultListModel<>();
+    final JList<Goal> list = new JList<>(model);
 
     GoalList g = new GoalList();
-    model.addElement(new Goal(1,"1","1"));
-    model.addElement(new Goal(1,"3","3"));
-    model.addElement(new Goal(1,"1","2"));
-
-    for(Goal i: g){
-      model.add(i);
+    /*
+    g.add(new Goal(1,"1","1"));
+    g.add(new Goal(1,"3","3"));
+    g.add(new Goal(1,"1","2"));
+    g.add(new Goal(5,"test","test1"));*/
+    //g.Save();
+    g.Load();
+    for(Goal i: g.getList()){
+      model.addElement(i);
     }
 
 
@@ -55,6 +82,20 @@ public class Prototype{
         int index = selmodel.getMinSelectionIndex();
         if (index >= 0)
           model.remove(index);
+          Object[] a = model.toArray();
+          ArrayList<Goal> arr = new ArrayList<Goal>();
+          for(Object g:a){
+            arr.add((Goal) g);
+          }
+          g.replace(arr);
+          try{
+          g.Save();
+          }
+          catch(Exception e){
+            System.out.println("Exception :):):):)");
+            e.printStackTrace();
+          }
+
       }
 
     });

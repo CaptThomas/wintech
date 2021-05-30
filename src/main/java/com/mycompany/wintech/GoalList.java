@@ -1,4 +1,3 @@
-package com.mycompany.wintech;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
@@ -37,7 +36,7 @@ import java.util.ArrayList;
  */
 
 public class GoalList {
-  static ArrayList<Goal> Goals;
+  ArrayList<Goal> Goals;
   public GoalList(){
     Goals = new ArrayList<Goal>();
   }
@@ -47,11 +46,17 @@ public class GoalList {
      * @throws Exception
      */
     public void Save() throws Exception{
+    try{
     FileOutputStream fos = new FileOutputStream("listData");
     ObjectOutputStream oos = new ObjectOutputStream(fos);
     oos.writeObject(Goals);
     oos.close();
     fos.close();
+    }
+    catch(IOException ex)
+    {
+        System.out.println("IOException is caught");
+    }
   }
 
     /**
@@ -85,7 +90,6 @@ public class GoalList {
       Goals = a;
   }
   public ArrayList<Goal> getList(){
-      Goals.add(new Goal(3, "test", "-1"));
     return Goals;
   }
   public void add(Goal g){
