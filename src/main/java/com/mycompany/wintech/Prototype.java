@@ -158,7 +158,7 @@ public class Prototype{
                 int numcheck = g.getCheck().getChecks();
                 numcheck++;
                 g.replaceChecks(new Checks(numcheck));
-                System.out.println(numcheck);
+                
             }
             try{
                 g.Save();
