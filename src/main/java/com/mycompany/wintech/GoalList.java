@@ -37,7 +37,7 @@ import java.util.ArrayList;
  */
 
 public class GoalList {
-  ArrayList<Goal> Goals;
+  static ArrayList<Goal> Goals;
   public GoalList(){
     Goals = new ArrayList<Goal>();
   }
@@ -61,20 +61,18 @@ public class GoalList {
     catch (IOException ioe)
       {
        ioe.printStackTrace();
-       return null;
       }
     catch (ClassNotFoundException c)
       {
        System.out.println("Class not found");
        c.printStackTrace();
-       return null;
       }
   }
 
   public void replace(ArrayList<Goal> a){
       Goals = a;
   }
-  public  ArrayList<Goal> getList(String[] args){
+  public static ArrayList<Goal> getList(String[] args){
     return Goals;
   }
 }
