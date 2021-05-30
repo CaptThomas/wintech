@@ -8,16 +8,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.function.Function;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +35,11 @@ public class Prototype{
   }
   */
   public static void main(String args[]) throws Exception {
+
+
+
+
+
 
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
@@ -72,11 +68,33 @@ public class Prototype{
     }
 
 
+    JTextField xField = new JTextField(5);
+    JTextField yField = new JTextField(5);
+
+    JPanel myPanel = new JPanel();
+    myPanel.add(new JLabel("x:"));
+    myPanel.add(xField);
+    myPanel.add(new JLabel("y:"));
+    myPanel.add(yField);
+
+
+    JTextField time = new JTextField(5);
+    JTextField name = new JTextField(5);
+
+    Object[] test = {
+      "Time", time,
+      "Name", name
+    };
+
+
+
+
+
     panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
     panel.setLayout(new GridLayout(0,1));
 
 
-    delete.addActionListener(new ActionListener() {
+    delete.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent event) {
         ListSelectionModel selmodel = list.getSelectionModel();
         int index = selmodel.getMinSelectionIndex();
@@ -100,9 +118,36 @@ public class Prototype{
 
     });
 
+    add.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event){
+        int result = JOptionPane.showConfirmDialog(null, test,
+                 "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+          model.addElement(new Goal(Integer.parseInt(time.getText()),name.getText(),""));
+        }
+        Object[] a = model.toArray();
+        ArrayList<Goal> arr = new ArrayList<Goal>();
+
+        for(Object g:a){
+          arr.add((Goal) g);
+        }
+        g.replace(arr);
+        try{
+        g.Save();
+        }
+        catch(Exception e){
+          System.out.println("Exception :):):):)");
+          e.printStackTrace();
+        }
+      }
+    });
+
+
     leftPanel.add(new JScrollPane(list));
     rightPanel.add(delete);
+    rightPanel.add(add);
     rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+
     leftPanel.add(list);
     panel.add(leftPanel);
     panel.add(rightPanel);
@@ -116,10 +161,6 @@ public class Prototype{
     frame.setTitle("GUI");
     frame.pack();
     frame.setVisible(true);
-
-
-
-
 
   }
 }
