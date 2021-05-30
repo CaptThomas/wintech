@@ -91,7 +91,7 @@ public class Prototype{
     JTextField name = new JTextField(5);
 
     Object[] test = {
-      "Time", time,
+      "Minutes per day", time,
       "Name", name
     };
 
