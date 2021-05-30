@@ -1,10 +1,12 @@
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -252,14 +254,15 @@ public class Prototype{
     leftPanel.add(list);
     panel.add(leftPanel);
     panel.add(rightPanel);
-
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    frame.setPreferredSize(screenSize);
     frame.setSize(350, 250);
     frame.add(panel, BorderLayout.CENTER);
     //frame.add(new JList(data));
     //frame.add(delete);
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setTitle("GUI");
+    frame.setTitle("Grounded");
     frame.pack();
     frame.setVisible(true);
 
