@@ -29,7 +29,7 @@ public class TestFrame{
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
     GoalList a = new GoalList();
-
+    
 
 
 

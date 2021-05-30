@@ -39,7 +39,8 @@ public class Prototype{
 
 
 
-
+      Checks checks = new Checks(0);
+      
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
     JButton add = new JButton("Add");
@@ -57,7 +58,8 @@ public class Prototype{
     final JList<String> list = new JList<>(model);
 
     GoalList g = new GoalList();
-
+    g.LoadChecked();
+    checks = g.getCheck();
     /*g.add(new Goal(1,"1","1"));
     g.add(new Goal(1,"3","3"));
     g.add(new Goal(1,"1","2"));
@@ -153,9 +155,14 @@ public class Prototype{
                 }).forEachOrdered(s -> {
                     model.addElement(s);
                 });
+                int numcheck = g.getCheck().getChecks();
+                numcheck++;
+                g.replaceChecks(new Checks(numcheck));
+                System.out.println(numcheck);
             }
             try{
                 g.Save();
+                g.SaveChecked();
             }
             catch(Exception e){
                 System.out.println("Exception :):):):)");

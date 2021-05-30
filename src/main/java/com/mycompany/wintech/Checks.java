@@ -1,9 +1,10 @@
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 
-import java.time.format.DateTimeFormatter;
+
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /*
  * The MIT License
  *
@@ -32,43 +33,21 @@ import java.time.LocalDateTime;
  *
  * @author Thomas
  */
-public class Goal implements Serializable {
+public class Checks implements Serializable {
     
-  private final int minutes;
-  private final String name;
-  private boolean finished;
-  private String completed;
+    
+  private int checks;
 
     /**
      *
-     * @param i
      * @param m
-     * @param n
-     * @param o
      */
-    public Goal(int m, String n, String o){
-    minutes = m;
-    name = n;
-    completed = o;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    LocalDateTime now = LocalDateTime.now();
-    finished = completed == null ? dtf.format(now) == null : completed.equals(dtf.format(now));
+    public Checks(int m){
+    checks = m;
   }
-  public int getMinutes(){
-    return minutes;
-  }
-  public String getName(){
-    return name;
-  }
-  public boolean getFinished(){
-    return finished;
-  }
-  public String getCompleted(){
-    return completed;
+  public int getChecks(){
+    return checks;
   }
 
-  @Override
-  public String toString() {
-      return minutes + "" + name + completed;
-  }
-}
+    }
+

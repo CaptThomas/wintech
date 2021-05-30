@@ -37,8 +37,10 @@ import java.util.ArrayList;
 
 public class GoalList {
   ArrayList<Goal> Goals;
+  Checks check;
   public GoalList(){
     Goals = new ArrayList<Goal>();
+    check = new Checks(0);
   }
 
     /**
@@ -50,6 +52,19 @@ public class GoalList {
     FileOutputStream fos = new FileOutputStream("listData");
     ObjectOutputStream oos = new ObjectOutputStream(fos);
     oos.writeObject(Goals);
+    oos.close();
+    fos.close();
+    }
+    catch(IOException ex)
+    {
+        System.out.println("IOException is caught");
+    }
+  }
+    public void SaveChecked() throws Exception{
+    try{
+    FileOutputStream fos = new FileOutputStream("intData");
+    ObjectOutputStream oos = new ObjectOutputStream(fos);
+    oos.writeObject(check);
     oos.close();
     fos.close();
     }
@@ -81,7 +96,25 @@ public class GoalList {
        c.printStackTrace();
       }
   }
-
+    public void LoadChecked() throws Exception{
+    try{
+      FileInputStream fis = new FileInputStream("intData");
+      ObjectInputStream ois = new ObjectInputStream(fis);
+      check = (Checks) ois.readObject();
+      ois.close();
+      fis.close();
+    }
+    catch (IOException ioe)
+      {
+       ioe.printStackTrace();
+      }
+    catch (ClassNotFoundException c)
+      {
+       System.out.println("Class not found");
+       c.printStackTrace();
+      }
+  }
+    
     /**
      *
      * @param a
@@ -89,8 +122,14 @@ public class GoalList {
   public void replace(ArrayList<Goal> a){
       Goals = a;
   }
+  public void replaceChecks(Checks a) {
+      check = a;
+  }
   public ArrayList<Goal> getList(){
     return Goals;
+  }
+  public Checks getCheck() {
+      return check;
   }
   public void add(Goal g){
     Goals.add(g);
