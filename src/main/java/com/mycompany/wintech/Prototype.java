@@ -114,11 +114,8 @@ public class Prototype{
         int index = selmodel.getMinSelectionIndex();
         if (index >= 0)
           model.remove(index);
-          Object[] a = model.toArray();
-          ArrayList<Goal> arr = new ArrayList<Goal>();
-          for(Object g:a){
-            arr.add((Goal) g);
-          }
+          ArrayList<Goal> arr =g.getList();
+          arr.remove(index);
           g.replace(arr);
           try{
           g.Save();
@@ -139,14 +136,27 @@ public class Prototype{
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
                 LocalDateTime now = LocalDateTime.now();
 
-                Object[] a = model.toArray();
-                ArrayList<Goal> arr = new ArrayList<>();
-                for(Object goal:a){
-                    arr.add((Goal) goal);
-                }
+                ArrayList<Goal> arr = g.getList();
+    
                 Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), dtf.format(now));
                 arr.set(index, goal);
                 g.replace(arr);
+                for (int x = 0 ;x < model.getSize();) {
+                    model.remove(x);
+                    x++;
+                }
+                if (arr != null) {
+                arr.stream().map((Goal newgoals) -> {
+                    String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
+                    if (newgoals.getFinished() == true) {
+                        s = String.format("%s completed today", s);
+                    } else {
+                        s = String.format("%s not yet completed today", s);
+                    } return s;
+        }).forEachOrdered(s -> {
+            model.addElement(s);
+        });
+    }
                 try{
                     g.Save();
                 }
@@ -165,14 +175,27 @@ public class Prototype{
             int index = selmodel.getMinSelectionIndex();
             if (index >= 0) {
 
-                Object[] a = model.toArray();
-                ArrayList<Goal> arr = new ArrayList<Goal>();
-                for(Object g:a){
-                    arr.add((Goal) g);
-                }
+                
+                ArrayList<Goal> arr = g.getList();
+                
                 Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), "-1");
                 arr.set(index, goal);
                 g.replace(arr);
+                for (int x = 0 ;x < model.getSize(); x++) {
+                    model.remove(x);
+                }
+                if (arr != null) {
+                arr.stream().map((Goal newgoals) -> {
+                    String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
+                    if (newgoals.getFinished() == true) {
+                        s = String.format("%s completed today", s);
+                    } else {
+                        s = String.format("%s not yet completed today", s);
+                    } return s;
+        }).forEachOrdered(s -> {
+            model.addElement(s);
+        });
+                }
                 try{
                     g.Save();
                 }
@@ -191,7 +214,7 @@ public class Prototype{
         int result = JOptionPane.showConfirmDialog(null, test,
                  "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-          model.addElement(new Goal(Integer.parseInt(time.getText()),name.getText(),""));
+          //model.addElement(new Goal(Integer.parseInt(time.getText()),name.getText(),""));
         }
         Object[] a = model.toArray();
         ArrayList<Goal> arr = new ArrayList<Goal>();
