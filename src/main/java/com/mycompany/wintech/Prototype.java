@@ -141,10 +141,7 @@ public class Prototype{
                 Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), dtf.format(now));
                 arr.set(index, goal);
                 g.replace(arr);
-                for (int x = 0 ;x < model.getSize();) {
-                    model.remove(x);
-                    x++;
-                }
+                model.clear();
                 if (arr != null) {
                 arr.stream().map((Goal newgoals) -> {
                     String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
@@ -181,9 +178,7 @@ public class Prototype{
                 Goal goal = new Goal(arr.get(index).getMinutes(), arr.get(index).getName(), "-1");
                 arr.set(index, goal);
                 g.replace(arr);
-                for (int x = 0 ;x < model.getSize(); x++) {
-                    model.remove(x);
-                }
+                model.clear();
                 if (arr != null) {
                 arr.stream().map((Goal newgoals) -> {
                     String s = String.format("%s for %d minutes |", newgoals.getName(), newgoals.getMinutes());
