@@ -46,6 +46,7 @@ public class Prototype{
     JButton add = new JButton("Add");
     JButton check = new JButton("Check");
     JButton uncheck = new JButton("Uncheck");
+    JButton suggest = new JButton("Suggest");
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -111,6 +112,23 @@ public class Prototype{
       }
     };
     new Timer(600000, timeWarn).start();
+
+    suggest.addActionListener((ActionEvent event) -> {
+      String[] Quotes = {
+        "Stretch for 10 minutes",
+        "Take a breathing break (2min)",
+        "Take a walk or run (10-30min depending on activity level)",
+        "Get some water, make sure to drink over 8 cups per day",
+        "Meditate (2 minutes)",
+        "Get a chore done",
+        "Finish a task you've been putting off"
+
+      };
+      int quote =   (int) (Math.random() * Quotes.length);
+
+      String s = Quotes[quote];
+          JOptionPane.showMessageDialog(frame, s);
+    });
 
     delete.addActionListener((ActionEvent event) -> {
         ListSelectionModel selmodel = list.getSelectionModel();
@@ -241,6 +259,7 @@ public class Prototype{
     bottomPanel.add(add);
     bottomPanel.add(check);
     bottomPanel.add(uncheck);
+    bottomPanel.add(suggest);
 
     //bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
 
