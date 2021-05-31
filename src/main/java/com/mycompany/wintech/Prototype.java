@@ -136,7 +136,7 @@ public class Prototype{
     });
     reset.addActionListener((ActionEvent event) -> {
       w.reset();
-      cups1.setText(String.valueOf(w.getCups()));      
+      cups1.setText(String.valueOf(w.getCups()));
     });
 
 
@@ -324,6 +324,8 @@ public class Prototype{
     topPanel.setBackground(new Color(244, 241, 188));
     list.setBackground(new Color(244, 241, 188));
     bottomPanel.setBackground(new Color(244, 241, 188));
+    lastPanel.setBackground(new Color(244, 241, 188));
+
     Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
     frame.setIconImage(icon);
     frame.add(panel, BorderLayout.CENTER);
