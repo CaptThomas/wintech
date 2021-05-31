@@ -40,7 +40,7 @@ public class Prototype{
 
 
       Checks checks = new Checks(0);
-      
+
     JFrame frame = new JFrame();
     JButton delete = new JButton("Delete");
     JButton add = new JButton("Add");
@@ -49,10 +49,10 @@ public class Prototype{
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-    JPanel leftPanel = new JPanel();
-    JPanel rightPanel = new JPanel();
-    leftPanel.setLayout(new BorderLayout());
-    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+    JPanel topPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
+    topPanel.setLayout(new BorderLayout());
+    bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
 
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
@@ -60,11 +60,7 @@ public class Prototype{
     GoalList g = new GoalList();
     g.LoadChecked();
     checks = g.getCheck();
-    /*g.add(new Goal(1,"1","1"));
-    g.add(new Goal(1,"3","3"));
-    g.add(new Goal(1,"1","2"));
-    g.add(new Goal(5,"test","test1"));
-    g.Save();*/
+
     g.Load();
     ArrayList<Goal> Goals = g.getList();
     if (Goals != null) {
@@ -115,7 +111,7 @@ public class Prototype{
       }
     };
     new Timer(600000, timeWarn).start();
-    
+
     delete.addActionListener((ActionEvent event) -> {
         ListSelectionModel selmodel = list.getSelectionModel();
         int index = selmodel.getMinSelectionIndex();
@@ -158,7 +154,7 @@ public class Prototype{
                 int numcheck = g.getCheck().getChecks();
                 numcheck++;
                 g.replaceChecks(new Checks(numcheck));
-                
+
             }
             try{
                 g.Save();
@@ -240,23 +236,24 @@ public class Prototype{
     });
 
 
-    leftPanel.add(new JScrollPane(list));
-    rightPanel.add(delete);
-    rightPanel.add(add);
-    rightPanel.add(check);
-    rightPanel.add(uncheck);
-    rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+    topPanel.add(new JScrollPane(list));
+    bottomPanel.add(delete);
+    bottomPanel.add(add);
+    bottomPanel.add(check);
+    bottomPanel.add(uncheck);
 
-    leftPanel.add(list);
-    panel.add(leftPanel);
-    panel.add(rightPanel);
+    //bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+
+    topPanel.add(list);
+    panel.add(topPanel);
+    panel.add(bottomPanel);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     frame.setPreferredSize(screenSize);
     frame.setSize(350, 250);
     panel.setBackground(new Color(244, 241, 188));
-    leftPanel.setBackground(new Color(244, 241, 188));
+    topPanel.setBackground(new Color(244, 241, 188));
     list.setBackground(new Color(244, 241, 188));
-    rightPanel.setBackground(new Color(244, 241, 188));
+    bottomPanel.setBackground(new Color(244, 241, 188));
     Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
     frame.setIconImage(icon);
     frame.add(panel, BorderLayout.CENTER);
