@@ -202,15 +202,15 @@ public class Prototype{
                 if (numcheck % 5 == 0) {
                     String[] Quotes = {
         "WOW! Nice job completing your goal! Keep it up, \"Opportunity does not knock, it presents itself when you beat down the door.\" - Kyle Chandler",
-        "You're finished with your goal already? Impressive! Just remember the wise words of our genie, Will Smith, \"Don\'t let success go to your head and failure to your heart.\" But… since you did such a good job, I\'ll let it slide.",
+        "You're finished with your goal already? Impressive! Just remember the wise words of our genie, Will Smith, \"Don\'t let success go to your head and failure to your heart.\" But... since you did such a good job, I\'ll let it slide.",
         "Have you finished your goal yet? Hmm.. you did? That took longer than expected, but remember, \"A diamond is merely a lump of coal that did well under pressure.\"",
         "That goal took a lonnggg time, but, \"Only those who attempts the absurd are capable of achieving the impossible.\" - Miguel de Unamuno",
         "You completed your goal? That\'s amazing! Keep going! \"Talent hits a target no one else can hit. Genius hits a target no one else can see.\"- Arthur Schopenhauer",
         "You took your time with that goal, but that\'s Ok! \"Success is a slow process, quitting won\'t speed it up.\"",
         "Keep working hard and you\'ll be sure to achieve the rest of your goals, but keep in mind \"What you get by achieving your goals is as important as what you become by achieving your goals.\"- Henry David Thoreau",
         "You completed another goal! How cool! Just as cool as how, \"Nothing is impossible because it says i\'m possible!\"- Audrey Hepburn Let\'s remember that for setting our next goal.",
-        "As Steven Wright said, \"If at first you don\'t succeed, then skydiving definitely isn\'t for you.\" Hmmmm…..let\'s complete another goal instead!",
-        "Andddd… Yes! You completed another goal for today! Let\'s do this again tomorrow because, remember, \"The secret of your success is found in your daily routines.\""
+        "As Steven Wright said, \"If at first you don\'t succeed, then skydiving definitely isn\'t for you.\" Hmmmm...let\'s complete another goal instead!",
+        "Andddd... Yes! You completed another goal for today! Let\'s do this again tomorrow because, remember, \"The secret of your success is found in your daily routines.\""
 
       };
       int quote =   (int) (Math.random() * Quotes.length);
