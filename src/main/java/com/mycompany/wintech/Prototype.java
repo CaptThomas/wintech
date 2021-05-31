@@ -20,6 +20,7 @@ public class Prototype{
 
 
   public static ArrayList<Goal> dToArr(JList<Goal> dm){
+
     //ArrayList<Goal> r = new ArrayList<Goal>();
     int s = dm.getModel().getSize();
     ArrayList<Goal> list = new ArrayList<>(s);
@@ -28,13 +29,14 @@ public class Prototype{
     }
     return list;
   }
+
   /*
   public DefaultListModel<Goal> arrToD(){
 
   }
   */
   public static void main(String args[]) throws Exception {
-
+    waterCounter w = new waterCounter();
 
 
 
@@ -48,12 +50,27 @@ public class Prototype{
     JButton uncheck = new JButton("Uncheck");
     JButton suggest = new JButton("Suggest");
     JPanel panel = new JPanel();
-    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+    JButton addcup = new JButton("Add Cup");
+    JButton reset = new JButton("Reset");
+    JLabel cups = new JLabel("Cups of Water drunk, try to get at least 8 per day!");
+    JLabel cups1 = new JLabel("0");
+
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
     JPanel topPanel = new JPanel();
     JPanel bottomPanel = new JPanel();
+    JPanel lastPanel = new JPanel();
     topPanel.setLayout(new BorderLayout());
     bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+    lastPanel.setLayout(new BoxLayout(lastPanel, BoxLayout.Y_AXIS));
+
+
+
+
+
+
+
 
     final DefaultListModel<String> model = new DefaultListModel<>();
     final JList<String> list = new JList<>(model);
@@ -112,6 +129,16 @@ public class Prototype{
       }
     };
     new Timer(600000, timeWarn).start();
+
+    addcup.addActionListener((ActionEvent event) -> {
+      w.drink();
+      cups1.setText(String.valueOf(w.getCups()));
+    });
+    reset.addActionListener((ActionEvent event) -> {
+      w.reset();
+      cups1.setText(String.valueOf(w.getCups()));      
+    });
+
 
     suggest.addActionListener((ActionEvent event) -> {
       String[] Quotes = {
@@ -261,11 +288,16 @@ public class Prototype{
     bottomPanel.add(uncheck);
     bottomPanel.add(suggest);
 
+    lastPanel.add(addcup);
+    lastPanel.add(reset);
+    lastPanel.add(cups);
+    lastPanel.add(cups1);
     //bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
 
     topPanel.add(list);
     panel.add(topPanel);
     panel.add(bottomPanel);
+    panel.add(lastPanel);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     frame.setPreferredSize(screenSize);
     frame.setSize(350, 250);
