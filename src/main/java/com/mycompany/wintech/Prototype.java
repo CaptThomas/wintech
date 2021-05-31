@@ -324,7 +324,7 @@ public class Prototype{
     topPanel.setBackground(new Color(244, 241, 188));
     list.setBackground(new Color(244, 241, 188));
     bottomPanel.setBackground(new Color(244, 241, 188));
-    lastPanel.setBackground(new Color(244, 241, 188));
+    lastPanel.setBackground(new Color(52, 235, 225));
 
     Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
     frame.setIconImage(icon);
